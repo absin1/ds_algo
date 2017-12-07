@@ -16,8 +16,18 @@ public class RansomNote {
 		for (int ransom_i = 0; ransom_i < n; ransom_i++) {
 			ransom[ransom_i] = in.next();
 		}
-		//memoryHeavy(n, magazine, ransom);
-		List<String> ransomAsList = Arrays.asList(ransom);
+		// memoryHeavy(n, magazine, ransom);
+		HashMap<String, Integer> ran = new HashMap<>();
+		for (String string : ransom) {
+			if (ran.containsKey(string)) {
+				Integer integer = ran.get(string);
+				ran.put(string, (integer + 1));
+			} else {
+				ran.put(string, 1);
+			}
+		}
+		List<String> magazineAsList = Arrays.asList(magazine);
+
 	}
 
 	private static void memoryHeavy(int n, String[] magazine, String[] ransom) {
@@ -49,7 +59,7 @@ public class RansomNote {
 				}
 			}
 		}
-		if(size==n){
+		if (size == n) {
 			System.out.println("Yes");
 		} else {
 			System.out.println("No");
