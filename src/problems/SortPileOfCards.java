@@ -12,6 +12,7 @@ public class SortPileOfCards {
 	// cards in increasing order.
 	// https://practice.geeksforgeeks.org/problems/sort-the-pile-of-cards/0
 	public static void main(String[] args) {
+		// failed();
 		Scanner scanner = new Scanner(System.in);
 		List<Integer> movess = new ArrayList<>();
 		int T = scanner.nextInt();
@@ -21,7 +22,17 @@ public class SortPileOfCards {
 			for (int i = 0; i < N; i++) {
 				cards[i] = scanner.nextInt();
 			}
-			movess.add(findNumberofMoves(cards, N, 0));
+			int[] cardss = cards;
+			int count = 0;
+			while (biggestHasSmallerOnRight(cardss)) {
+				cardss = takeBiggestRightToBiggestToTop(cardss);
+				++count;
+			}
+			while (smallestHasElementsToLeft(cardss)) {
+				cardss = takeSmallestToTop(cardss);
+				++count;
+			}
+			movess.add(count);
 		}
 		scanner.close();
 		for (int i : movess) {
@@ -29,19 +40,71 @@ public class SortPileOfCards {
 		}
 	}
 
-	private static int findNumberofMoves(int[] cards, int n, int count) {
+	private static int[] takeSmallestToTop(int[] cardss) {
+		int minIndex = 0;
+		for (int i = 0; i < cardss.length; i++) {
+			if (cardss[i] < cardss[minIndex]) {
+				minIndex = i;
+			}
+		}
+		cardss = takeToTop(cardss, minIndex);
+		return cardss;
+	}
+
+	private static boolean smallestHasElementsToLeft(int[] cardss) {
+		int minIndex = 0;
+		for (int i = 0; i < cardss.length; i++) {
+			if (cardss[i] < cardss[minIndex]) {
+				minIndex = i;
+			}
+		}
+		if (minIndex == 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+
+	private static int[] takeBiggestRightToBiggestToTop(int[] cardss) {
 		int maxIndex = 0;
-		for (int i = 0; i < n; i++) {
-			if (cards[i] > cards[maxIndex]) {
+		for (int i = 1; i < cardss.length; i++) {
+			if (cardss[i] > cardss[maxIndex]) {
 				maxIndex = i;
 			}
 		}
-		if (maxIndex == 0) {
-			return count + n - 1;
-		} else {
-			count = count + n - maxIndex - 1;
-			return findNumberofMoves(cards, maxIndex, count);
+		int nextMaxIndex = maxIndex + 1;
+		for (int i = nextMaxIndex; i < cardss.length; i++) {
+			if (cardss[i] > cardss[nextMaxIndex]) {
+				nextMaxIndex = i;
+			}
 		}
+		cardss = takeToTop(cardss, nextMaxIndex);
+		return cardss;
+	}
+
+	private static int[] takeToTop(int[] cardss, int nextMaxIndex) {
+		int[] cards = new int[cardss.length];
+		cards[0] = cardss[nextMaxIndex];
+		int j = 1;
+		for (int i = 0; i < cardss.length; i++) {
+			if (i != nextMaxIndex) {
+				cards[j++] = cardss[i];
+			}
+		}
+		return cards;
+	}
+
+	private static boolean biggestHasSmallerOnRight(int[] cardss) {
+		Boolean biggestHasSmallerOnRight = false;
+		int maxIndex = 0;
+		for (int i = 1; i < cardss.length; i++) {
+			if (cardss[i] > cardss[maxIndex]) {
+				maxIndex = i;
+			}
+		}
+		if (maxIndex < (cardss.length-1))
+			biggestHasSmallerOnRight = true;
+		return biggestHasSmallerOnRight;
 	}
 
 }
