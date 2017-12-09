@@ -3,13 +3,46 @@ package binaySearch;
 public class TraverseBST {
 
 	public static void main(String[] args) {
-		TraverseBST bst = new TraverseBST();
 		// Node root = createSngleBST(1, 2, 3);
-		Node root = createDoubleBST();
-		bst.depthPostorder(root);
+		Node l = CreateBST.createSngleBST(1, 2, 3);
+		Node r = CreateBST.createSngleBST(5, 6, 7);
+		Node root = CreateBST.createBiBST(l, 4, r);
+		depthPostorder(root);
+		breadthTraversal(root);
 	}
 
-	public void depthInorder(Node root) {
+	public static void breadthTraversal(Node root) {
+		int height = getBinaryTreeHeight(root);
+		for (int i = 0; i < height; i++) {
+			printGivenLevel(root, i);
+		}
+	}
+
+	public static int getBinaryTreeHeight(Node root) {
+		if (root == null)
+			return 0;
+		else {
+			int lheight = getBinaryTreeHeight(root.left);
+			int rheight = getBinaryTreeHeight(root.right);
+			if (lheight > rheight)
+				return lheight + 1;
+			else
+				return rheight + 1;
+		}
+	}
+
+	private static void printGivenLevel(Node root, int level) {
+		if (root == null)
+			return;
+		if (level == 1) {
+			System.out.println(root.data);
+		} else if (level > 1) {
+			printGivenLevel(root.left, level - 1);
+			printGivenLevel(root.right, level - 1);
+		}
+	}
+
+	public static void depthInorder(Node root) {
 		// Inorder depth first traversal goes left-root-right
 		if (root == null)
 			return;
@@ -18,7 +51,7 @@ public class TraverseBST {
 		System.out.println(root.data);
 	}
 
-	public void depthPreorder(Node root) {
+	public static void depthPreorder(Node root) {
 		// Preorder depth first traversal goes root-left-right
 		if (root == null)
 			return;
@@ -27,7 +60,7 @@ public class TraverseBST {
 		depthPreorder(root.right);
 	}
 
-	public void depthPostorder(Node root) {
+	public static void depthPostorder(Node root) {
 		// Postorder depth first traversal goes from left-right-root
 		if (root == null)
 			return;
