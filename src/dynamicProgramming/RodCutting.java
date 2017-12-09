@@ -24,4 +24,41 @@ public class RodCutting {
 	 * of the Rod Cutting problem. The implementation simply follows the
 	 * recursive structure mentioned above.
 	 */
+
+	public static void main(String[] args) {
+		int[] a = { 1, 5, 8, 9, 10, 17, 17, 20 };
+		System.out.println("The max price possible is: " + cutRodInefficient(a, a.length));
+		System.out.println("The max price possible is: " + cutRodEfficient(a, a.length));
+	}
+
+	public static int cutRodEfficient(int[] a, int length) {
+		int[] val = new int[length + 1];
+		val[0] = 0;
+		int i, j;
+		for (i = 1; i <= length; i++) {
+			int maxValue = Integer.MIN_VALUE;
+			for (j = 0; j < i; j++) {
+				maxValue = max(maxValue, a[j] + val[i - j - 1]);
+			}
+			val[i] = maxValue;
+		}
+		return val[length];
+	}
+
+	public static int cutRodInefficient(int[] a, int length) {
+		if (length <= 0)
+			return 0;
+		int maxValue = Integer.MIN_VALUE;
+		for (int i = 0; i < length; i++) {
+			maxValue = max(maxValue, a[i] + cutRodInefficient(a, length - i - 1));
+		}
+		return maxValue;
+	}
+
+	private static int max(int maxValue, int i) {
+		if (maxValue > i)
+			return maxValue;
+		else
+			return i;
+	}
 }
