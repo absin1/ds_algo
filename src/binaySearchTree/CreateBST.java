@@ -1,4 +1,4 @@
-package binaySearch;
+package binaySearchTree;
 
 public class CreateBST {
 	public static Node createSngleBST(int left, int root, int right) {

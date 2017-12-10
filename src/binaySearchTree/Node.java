@@ -1,4 +1,4 @@
-package binaySearch;
+package binaySearchTree;
 
 public class Node {
 	int data;
