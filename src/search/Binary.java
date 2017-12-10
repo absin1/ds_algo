@@ -4,6 +4,10 @@ import java.util.Scanner;
 
 public class Binary {
 	public static void main(String[] args) {
+		// Note: The array has to be sorted
+		// The time complexity is O(logn) as in the worst case there will be logn jumps
+		// Why logn?
+		// Think how many times you have to divide a number by 2 to get to unity
 		int arr[] = { 2, 3, 4, 10, 40 };
 		Scanner scanner = new Scanner(System.in);
 		int find = scanner.nextInt();
