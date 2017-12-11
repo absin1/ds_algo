@@ -11,6 +11,9 @@ public class AnagramsPossible {
 		backTrack(s.toCharArray(), 0, s.toCharArray().length - 1);
 	}
 
+	// O(n*n!) Note that there are n! permutations and it requires O(n) time to
+	// print a a permutation.
+	// Note: It also doesn't handle repetitions that is TO-DO
 	public static void backTrack(char[] s, int i, int n) {
 		int j;
 		if (i == n)

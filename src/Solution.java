@@ -3,17 +3,27 @@ import java.util.Scanner;
 public class Solution {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		double mealCost = scan.nextDouble(); // original meal price
-		int tipPercent = scan.nextInt(); // tip percentage
-		int taxPercent = scan.nextInt(); // tax percentage
+		int n = scan.nextInt();
 		scan.close();
-		double sellingPrice = mealCost * (1.0 + ((float) (tipPercent + taxPercent) / 100));
-		// Write your calculation code here.
+		String ans = "";
 
-		// cast the result of the rounding operation to an int and save it as
-		// totalCost
-		int totalCost = (int) Math.round(sellingPrice);
-		System.out.println("The total meal cost is " + totalCost + " dollars.");
-		// Print your result
+		// if 'n' is NOT evenly divisible by 2 (i.e.: n is odd)
+		if (n % 2 == 1) {
+			ans = "Weird";
+		} else {
+			// Complete the code
+			// n is even
+			if (n >= 2) {
+				if (n <= 5) {
+					ans = "Not Weird";
+				} else if (n >= 6) {
+					if (n <= 20)
+						ans = "Weird";
+					else if (n > 20)
+						ans = "Not Weird";
+				}
+			}
+		}
+		System.out.println(ans);
 	}
 }
