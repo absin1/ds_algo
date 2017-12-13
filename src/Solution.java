@@ -1,29 +1,24 @@
-import java.util.Scanner;
-
 public class Solution {
-	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
-		int n = scan.nextInt();
-		scan.close();
-		String ans = "";
 
-		// if 'n' is NOT evenly divisible by 2 (i.e.: n is odd)
-		if (n % 2 == 1) {
-			ans = "Weird";
-		} else {
-			// Complete the code
-			// n is even
-			if (n >= 2) {
-				if (n <= 5) {
-					ans = "Not Weird";
-				} else if (n >= 6) {
-					if (n <= 20)
-						ans = "Weird";
-					else if (n > 20)
-						ans = "Not Weird";
-				}
+	public static void main(String[] args) {
+
+		for (int input = 0; input < 8; input++) {
+
+			boolean[] bits = new boolean[3];
+			for (int i = 2; i >= 0; i--) {
+				bits[i] = (input & (1 << i)) != 0;
 			}
+
+			System.out.print(input + " = ");
+			for (boolean b : bits) {
+				if (b)
+					System.out.print("1 ");
+				else
+					System.out.print("0 ");
+
+			}
+			System.out.println();
+
 		}
-		System.out.println(ans);
 	}
 }
