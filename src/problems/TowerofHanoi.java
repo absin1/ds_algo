@@ -12,21 +12,25 @@ public class TowerofHanoi {
 		// System.out.print("Enter the number of rods: ");
 		// int rods = scanner.nextInt();
 		scanner.close();
-		char extraAuxRod = 'D';
-		char auxRod = 'C';
-		char toRod = 'B';
+		char auxRod = 'B';
+		char toRod = 'C';
 		char fromRod = 'A';
-		tower(disks, fromRod, toRod, auxRod);
+		//tower(disks, fromRod, toRod, auxRod);
+		towerWithExtraAux(disks, 'A', 'D', 'B', 'C');
 	}
 
 	private static void towerWithExtraAux(int disks, char fromRod, char toRod, char auxRod, char extraAuxRod) {
+		if (disks == 0)
+			return;
 		if (disks == 1) {
-			System.out.println("Move disk " + disks + " from rod " + fromRod + " to rod " + toRod);
+			System.out.println(++move + ": Move disk " + disks + " from rod " + fromRod + " to rod " + toRod);
 			return;
 		}
-		towerWithExtraAux(disks - 1, fromRod, extraAuxRod, auxRod, toRod);
-		System.out.println("Move disk " + disks + " from rod " + fromRod + " to rod " + toRod);
-		towerWithExtraAux(disks - 1, extraAuxRod, auxRod, toRod, fromRod);
+		towerWithExtraAux(disks - 2, fromRod, auxRod, extraAuxRod, toRod);
+		System.out.println(++move + ": Move disk " + (disks - 1) + " from rod " + fromRod + " to rod " + extraAuxRod);
+		System.out.println(++move + ": Move disk " + disks + " from rod " + fromRod + " to rod " + toRod);
+		System.out.println(++move + ": Move disk " + (disks - 1) + " from rod " + extraAuxRod + " to rod " + toRod);
+		towerWithExtraAux(disks - 2, auxRod, toRod, fromRod, extraAuxRod);
 
 	}
 
