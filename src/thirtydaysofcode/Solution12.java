@@ -2,6 +2,16 @@ package thirtydaysofcode;
 
 import java.util.Scanner;
 
+/*
+ * Heraldo Memelli 8135627
+2
+100 80
+*/
+/*
+Name: Memelli, Heraldo
+ID: 8135627
+Grade: O
+ */
 class Person {
 	protected String firstName;
 	protected String lastName;
