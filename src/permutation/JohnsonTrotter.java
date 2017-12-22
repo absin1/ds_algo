@@ -1,8 +1,12 @@
 package permutation;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class JohnsonTrotter {
+	static HashSet<String> permutations = new HashSet<>();
 	public static void main(String args[]) {
 		System.out.println("Enter the count of integers whose all "
 				+ "possible orders will be permuted using Johnson and Trotter");
@@ -22,6 +26,7 @@ public class JohnsonTrotter {
 		for (int j = 1; j < permutationCount; j++) {
 			swap(arr, first, second);
 			print(arr);
+			permutations.add(Arrays.toString(arr));
 			if (direction.equalsIgnoreCase("backward")) {
 				if (second == N - 1) {
 					if (isTerminalHandled) {
@@ -61,6 +66,11 @@ public class JohnsonTrotter {
 					second++;
 				}
 			}
+		}
+		System.out.println("Unique permutations found: "+permutations.size());
+		for (Iterator iterator = permutations.iterator(); iterator.hasNext();) {
+			String string = (String) iterator.next();
+			System.out.println(string);	
 		}
 	}
 
