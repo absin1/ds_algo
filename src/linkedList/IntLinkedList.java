@@ -8,6 +8,10 @@ public class IntLinkedList {
 		this.root = node;
 	}
 
+	public IntLinkedList() {
+
+	}
+
 	static class Node {
 		int data;
 		Node next;
