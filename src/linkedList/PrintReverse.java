@@ -42,8 +42,8 @@ public class PrintReverse {
 		while (root.next != null) {
 			Node temp = root.next;
 			root.next = previous;
-		
-			}
+			previous = root;
+		}
 	}
 
 	private static void printReverseRecusion(Node root) {
