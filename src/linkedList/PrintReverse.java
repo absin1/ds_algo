@@ -38,12 +38,33 @@ public class PrintReverse {
 	}
 
 	private static void printReverseByReversing(Node root) {
-		Node previous = null;
-		while (root.next != null) {
-			Node temp = root.next;
-			root.next = previous;
-			previous = root;
+		IntLinkedList reversed = getReversedLinkedList(root);
+		while (reversed.root != null) {
+			System.out.println(reversed.root.data);
+			reversed.root = reversed.root.next;
 		}
+	}
+
+	private static IntLinkedList getReversedLinkedList(Node root) {
+		IntLinkedList reversed = new IntLinkedList();
+		int sizeofLinkedList = getSizeofLinkedList(root);
+		for (int i = sizeofLinkedList; i > 0; i--) {
+			Node temp = root;
+			for (int j = 1; j < i; j++) {
+				temp = temp.next;
+			}
+			reversed.push(temp.data);
+		}
+		return reversed;
+	}
+
+	private static int getSizeofLinkedList(Node root) {
+		int size = 0;
+		while (root != null) {
+			size++;
+			root = root.next;
+		}
+		return size;
 	}
 
 	private static void printReverseRecusion(Node root) {

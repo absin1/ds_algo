@@ -25,6 +25,10 @@ public class IntLinkedList {
 	public void push(int val) {
 		Node node = new Node(val);
 		Node r = root;
+		if (root == null) {
+			root = node;
+			return;
+		}
 		while (r.next != null)
 			r = r.next;
 		r.next = node;
