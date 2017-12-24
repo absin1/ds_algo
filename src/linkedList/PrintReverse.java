@@ -1,5 +1,8 @@
 package linkedList;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 import linkedList.IntLinkedList.Node;
 
 public class PrintReverse {
@@ -33,8 +36,20 @@ public class PrintReverse {
 		list.push(5);
 		// list.print();
 		// printReverseRecusion(list.root);
-		printReverseByReversing(list.root);
+		// printReverseByReversing(list.root);
+		printReverseUsingStack(list.root);
 		// printReverse(list.root);
+	}
+
+	private static void printReverseUsingStack(Node root) {
+		Stack<Integer> stack = new Stack<>();
+		while (root != null) {
+			stack.push(root.data);
+			root = root.next;
+		}
+		while (!stack.isEmpty()) {
+			System.out.println(stack.pop());
+		}
 	}
 
 	private static void printReverseByReversing(Node root) {
