@@ -27,4 +27,33 @@ public class LongestIncreasingSubsequence {
 
 		return max;
 	}
+	public void findLongestSub(int arr[]){
+
+    int len =  arr.length;
+    int i,k;
+    int storeMax[] = new int[len];
+    storeMax[0]=1;
+    int currentMax;
+    
+    for(i=1;i<len;i++){
+        currentMax=0;
+        
+        for(k=i-1;k>=0;k--){
+            if(arr[k]<arr[i])
+                if(storeMax[k]>currentMax)
+                    currentMax=storeMax[k];
+            
+        }
+
+        storeMax[i]=currentMax+1;  
+    }
+    
+    currentMax=1;
+    for(i=1;i<len;i++)
+        if(storeMax[i]>currentMax)
+            currentMax=storeMax[i];
+            
+    System.out.println("Longest Pattern length is "+currentMax);
+
+}
 }
